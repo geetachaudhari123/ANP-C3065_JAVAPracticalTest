@@ -1,0 +1,192 @@
+mysql> create table employee(
+    -> id int not null,
+    -> name varchar(20)not null,
+    -> salary int not null,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.40 sec)
+
+mysql> desc employee;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(20) | NO   |     | NULL    |       |
+| salary | int         | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.08 sec)
+
+mysql> insert into  employee values(1,'harsh',2000);
+Query OK, 1 row affected (0.43 sec)
+
+mysql> insert into  employee values(2,'ram',3000);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into  employee values(3,'shyam',4000);
+Query OK, 1 row affected (0.36 sec)
+
+mysql> select *from  employee;
++----+-------+--------+
+| id | name  | salary |
++----+-------+--------+
+|  1 | harsh |   2000 |
+|  2 | ram   |   3000 |
+|  3 | shyam |   4000 |
++----+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sum(salary) FROM employee GROUP BY NAME;
++-------+-------------+
+| name  | sum(salary) |
++-------+-------------+
+| harsh |        2000 |
+| ram   |        3000 |
+| shyam |        4000 |
++-------+-------------+
+3 rows in set (0.05 sec)
+
+mysql> SELECT Name, SUM(Salary) FROM employee GROUP BY Name WITH ROLLUP;
++-------+-------------+
+| Name  | SUM(Salary) |
++-------+-------------+
+| harsh |        2000 |
+| ram   |        3000 |
+| shyam |        4000 |
+| NULL  |        9000 |
++-------+-------------+
+4 rows in set (0.20 sec)
+mysql> select *FROM employee ORDER BY id;
++----+-------+--------+
+| id | name  | salary |
++----+-------+--------+
+|  1 | harsh |   2000 |
+|  2 | ram   |   3000 |
+|  3 | shyam |   4000 |
++----+-------+--------+
+3 rows in set (0.00 sec)
+mysql> select *FROM employee ORDER BY id;
++----+-------+--------+
+| id | name  | salary |
++----+-------+--------+
+|  1 | harsh |   2000 |
+|  2 | ram   |   3000 |
+|  3 | shyam |   4000 |
++----+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select name,salary,id from employee ORDER BY name,salary,id  DESC;
++-------+--------+----+
+| name  | salary | id |
++-------+--------+----+
+| harsh |   2000 |  1 |
+| ram   |   3000 |  2 |
+| shyam |   4000 |  3 |
++-------+--------+----+
+3 rows in set (0.00 sec)
+mysql> SELECT name,salary from employee where salary NOT BETWEEN 3000 AND 4000;
++-------+--------+
+| name  | salary |
++-------+--------+
+| harsh |   2000 |
++-------+--------+
+1 row in set (0.11 sec)
+mysql> SELECT COUNT(DISTINCT id)from employee;
++--------------------+
+| COUNT(DISTINCT id) |
++--------------------+
+|                  3 |
++--------------------+
+1 row in set (0.15 sec)
+
+mysql> SELECT SUM(salary)from employee;
++-------------+
+| SUM(salary) |
++-------------+
+|        9000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> SELECT MIN(salary)from employee;
++-------------+
+| MIN(salary) |
++-------------+
+|        2000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT MAX(salary)from employee;
++-------------+
+| MAX(salary) |
++-------------+
+|        4000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(salary)from employee;
++-------------+
+| AVG(salary) |
++-------------+
+|   3000.0000 |
++-------------+
+1 row in set (0.00 sec)
+mysql> SELECT NAME, SALARY from employee WHERE SALARY >(SELECT salary FROM employee WHERE name = 'harsh');
++-------+--------+
+| NAME  | SALARY |
++-------+--------+
+| ram   |   3000 |
+| shyam |   4000 |
++-------+--------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
