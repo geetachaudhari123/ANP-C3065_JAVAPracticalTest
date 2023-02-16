@@ -1,0 +1,91 @@
+mysql> use collectiondb;
+Database changed
+mysql> create table student(
+    -> id int not null,
+    -> name varchar(20) not null,
+    -> city varchar(20) not null,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   |     | NULL    |       |
+| city  | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into student values(1,'anju','navi mumbai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(1,'anju','navi mumbai');
+ERROR 1062 (23000): Duplicate entry '1' for key 'student.PRIMARY'
+mysql> insert into student values(2,'anju','navi mumbai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++----+------+-------------+
+| id | name | city        |
++----+------+-------------+
+|  1 | anju | navi mumbai |
+|  2 | anju | navi mumbai |
++----+------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student add age varchar(10);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   |     | NULL    |       |
+| city  | varchar(20) | NO   |     | NULL    |       |
+| age   | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> alter table student modify column city varchar(10);
+ERROR 1265 (01000): Data truncated for column 'city' at row 1
+mysql> alter table student modify column city varchar(30);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   |     | NULL    |       |
+| city  | varchar(30) | YES  |     | NULL    |       |
+| age   | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select * from student;
++----+------+-------------+------+
+| id | name | city        | age  |
++----+------+-------------+------+
+|  1 | anju | navi mumbai | NULL |
+|  2 | anju | navi mumbai | NULL |
++----+------+-------------+------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student drop column age;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   |     | NULL    |       |
+| city  | varchar(30) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
